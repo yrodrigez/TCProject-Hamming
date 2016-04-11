@@ -7,7 +7,34 @@ import java.io.IOException;
 public class Principal {
 
 	public static void main(String[] args) {
-		try {
+		int GENERADORA[][] = {
+				{ 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0 },
+				{ 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0 },
+				{ 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0 },
+				{ 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 },
+				{ 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0 },
+				{ 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0 },
+				{ 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1 }
+		};
+
+		int multiplicar[] [] ={
+				{ 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 }
+		};
+
+		Matriz m = new Matriz(GENERADORA);
+		System.out.println(m.toString());
+
+		Matriz multiplicada = m.multiplica(new Matriz(multiplicar));
+		System.out.println(multiplicada.toString());
+		multiplicada.trasponer();
+		System.out.println(multiplicada.toString());
+
+
+		/*try {
 			StringBuilder texto = new StringBuilder();
 			File archivo = new File ("El coran.txt");
 			FileReader fr = new FileReader (archivo);
@@ -31,7 +58,7 @@ public class Principal {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
             
 	}
 
