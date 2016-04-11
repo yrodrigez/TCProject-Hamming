@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class Principal {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		int GENERADORA[][] = {
 				{ 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 				{ 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -22,14 +22,15 @@ public class Principal {
 		};
 
 		int multiplicar[] [] ={
+				{ 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 },
 				{ 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 }
 		};
 
 		Matriz m = new Matriz(GENERADORA);
-		System.out.println(m.toString());
 
 		Matriz multiplicada = m.multiplica(new Matriz(multiplicar));
 		System.out.println(multiplicada.toString());
+		Thread.sleep(1000);
 		multiplicada.trasponer();
 		System.out.println(multiplicada.toString());
 

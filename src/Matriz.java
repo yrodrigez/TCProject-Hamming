@@ -1,6 +1,3 @@
-import java.util.Collection;
-import java.util.Iterator;
-
 public class Matriz {
     /*          X  Y    */
     private int [] []  matriz;
@@ -10,19 +7,20 @@ public class Matriz {
     }
 
     public Matriz(int x, int y) {
-       this.matriz = new int[x][y];
+       matriz = new int[y][x];
     }
 
     public void trasponer() {
-        Matriz retorno = new Matriz(this.getY(),this.getX());
+        Matriz traspuesta = new Matriz(getY(), getX());
 
-        for(int i= 0; i<retorno.getX() ; i++){
-            for(int j = 0; j<retorno.getY(); j++){
-                retorno.getMatriz()[i][j] = this.matriz[j][i];
+        for (int i = 0 ; i < this.getY() ; i++){
+            for(int j = 0 ; j < this.getX() ; j++){
+                traspuesta.getMatriz()[j][i] = this.matriz[i][j];
             }
+
         }
 
-        this.matriz = retorno.getMatriz();
+        this.matriz = traspuesta.getMatriz();
     }
 
     public int getX(){
@@ -39,7 +37,7 @@ public class Matriz {
         try{
             return this.matriz.length;
         }catch (NullPointerException ex) {
-            System.err.println("La matriz esta completa");
+            System.err.println("La matriz es nula");
             ex.printStackTrace();
             return 0;
         }
@@ -87,7 +85,7 @@ public class Matriz {
     }
 
     public int[][] getMatriz(){
-        return this.getMatriz();
+        return this.matriz;
     }
 
 
