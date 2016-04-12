@@ -6,8 +6,8 @@ import java.io.IOException;
 
 public class Principal {
 
-	public static void main(String[] args) throws InterruptedException {
-		int GENERADORA[][] = {
+	public static void main(String[] args) throws InterruptedException, IOException {
+		short GENERADORA[][] = {
 				{ 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 				{ 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 				{ 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -21,24 +21,47 @@ public class Principal {
 				{ 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1 }
 		};
 
-		int multiplicar[] [] ={
-				{ 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 },
-				{ 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 }
-		};
-/*
-		Matriz m = new Matriz(GENERADORA);
 
-		Matriz multiplicada = m.multiplica(new Matriz(multiplicar));
-		System.out.println(multiplicada.toString());
-		Thread.sleep(1000);
-		multiplicada.trasponer();
-		System.out.println(multiplicada.toString());
-*/
-		int [][] a = {
+		Matriz mGeneradora = new Matriz(GENERADORA);
+
+		short PARIDAD_TRASPUESTA[][] = {
+				{ 0, 0, 0, 1 },
+				{ 0, 0, 1, 0 },
+				{ 0, 0, 1, 1 },
+				{ 0, 1, 0, 0 },
+				{ 0, 1, 0, 1 },
+				{ 0, 1, 1, 0 },
+				{ 0, 1, 1, 1 },
+				{ 1, 0, 0, 0 },
+				{ 1, 0, 0, 1 },
+				{ 1, 0, 1, 0 },
+				{ 1, 0, 1, 1 },
+				{ 1, 1, 0, 0 },
+				{ 1, 1, 0, 1 },
+				{ 1, 1, 1, 0 },
+				{ 1, 1, 1, 1 }
+		};
+
+		Matriz mParidad = new Matriz(PARIDAD_TRASPUESTA);
+
+		StringBuilder texto = new StringBuilder();
+		File archivo = new File ("coran_red.txt");
+		FileReader fr = new FileReader (archivo);
+		BufferedReader br = new BufferedReader(fr);
+		String linea;
+
+		while((linea=br.readLine())!=null){
+			texto.append(linea).append("\n");
+		}
+		StringBuilder[] textoBinario = Hamming.palabrasCodigos(texto.toString());
+		Hamming.codificar(textoBinario, mGeneradora);
+		Hamming.decodificar(Hamming.leerFichero("Quijote.txt"), mParidad);
+/*
+		short [][] a = {
 				{1,0,0},
 				{3,4,2}
 		};
-		int [][] b = {
+		short [][] b = {
 				{2,1},
 				{0,3},
 				{1,0}
@@ -48,35 +71,18 @@ public class Principal {
 		Matriz B = new Matriz(b);
 
 		Matriz res = A.multiplica(B);
-
-		for(int i = 0 ; i< res.getX() ; i++){
-			for (int j= 0 ; j < res.getY() ; j++){
-				System.out.println(res.getMatriz()[i][j]);
-			}
-			System.out.println();
-		}
-
-
+		System.out.println(res.toString());*/
 		/*try {
-			StringBuilder texto = new StringBuilder();
-			File archivo = new File ("El coran.txt");
-			FileReader fr = new FileReader (archivo);
-			BufferedReader br = new BufferedReader(fr);
-			String linea;
 
-			while((linea=br.readLine())!=null){
-				texto.append(linea).append("\n");
-			}
 
-			StringBuilder[] textoBinario = Util.palabrasCodigos(texto.toString());
 
 			for (StringBuilder s: textoBinario) {
 				System.out.println(s);
 			}
 
-			Util.codificar(textoBinario);
+			Hamming.codificar(textoBinario);
 
-			Util.decodificar(Util.leerFichero("coran_codificado.txt"));
+			Hamming.decodificar(Hamming.leerFichero("coran_codificado.txt"));
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
