@@ -10,7 +10,7 @@ public class Matriz {
        matriz = new int[y][x];
     }
 
-    public void trasponer() {
+    public Matriz trasponer() {
         Matriz traspuesta = new Matriz(getY(), getX());
 
         for (int i = 0 ; i < this.getY() ; i++){
@@ -20,7 +20,7 @@ public class Matriz {
 
         }
 
-        this.matriz = traspuesta.getMatriz();
+        return traspuesta;
     }
 
     public int getX(){
@@ -53,25 +53,36 @@ public class Matriz {
                     + " por otra " + multiplicar.getX() + "x" + multiplicar.getY());
         }
 
-        System.out.println("Creando matriz de "+this.getX()+"x"+multiplicar.getY());
-
         Matriz retorno = new Matriz(
-                this.getX()
-                , multiplicar.getY()
+                this.getY()
+                , multiplicar.getX()
         );
 
-/*
-        for (int i = 0; i < matriz[0].length; i++) {
-            int suma = 0;
+        Matriz multiplicarTraspuesta = multiplicar.trasponer();
 
-            for (int j = 0; j < multiplicar.getMatriz().length; j++) {
-                suma += palabra[j] * matriz[j][i];
+        for (int i = 0; i < this.getY() ; i++) {
+            for(int j=0 ; j < multiplicar.getX(); j++){
+                retorno.getMatriz()[i][j] = multiplicarVectores(
+                        this.getMatriz()[i],
+                        multiplicarTraspuesta.getMatriz()[j]
+                );
             }
 
         }
-        */
-        retorno.binarize();
+
         return retorno;
+    }
+
+    private int multiplicarVectores(int [] v1, int [] v2){
+        if(v1.length != v2.length) {
+            throw new ArithmeticException("Vectores de diferente longitud."+v1.length+"x"+v2.length);
+        }
+        int suma = 0;
+        for (int i = 0; i < v1.length; i++){
+            suma += v1[i] * v2[i];
+        }
+
+        return suma;
     }
 
     public void binarize(){

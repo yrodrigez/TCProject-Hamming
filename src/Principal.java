@@ -25,7 +25,7 @@ public class Principal {
 				{ 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 },
 				{ 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 }
 		};
-
+/*
 		Matriz m = new Matriz(GENERADORA);
 
 		Matriz multiplicada = m.multiplica(new Matriz(multiplicar));
@@ -33,6 +33,28 @@ public class Principal {
 		Thread.sleep(1000);
 		multiplicada.trasponer();
 		System.out.println(multiplicada.toString());
+*/
+		int [][] a = {
+				{1,0,0},
+				{3,4,2}
+		};
+		int [][] b = {
+				{2,1},
+				{0,3},
+				{1,0}
+		};
+
+		Matriz A = new Matriz(a);
+		Matriz B = new Matriz(b);
+
+		Matriz res = A.multiplica(B);
+
+		for(int i = 0 ; i< res.getX() ; i++){
+			for (int j= 0 ; j < res.getY() ; j++){
+				System.out.println(res.getMatriz()[i][j]);
+			}
+			System.out.println();
+		}
 
 
 		/*try {
