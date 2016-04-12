@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -94,17 +95,16 @@ public class Principal {
 		return toret;
 	}
 
-	public static void imprimirMensaje(String[] mensaje){
+	public static void imprimirMensaje(String[] mensaje) throws Exception {
 		StringBuilder sbMensaje = new StringBuilder();
 		for(String palabraBinario : mensaje){
 			int palabraDecimal = Integer.parseInt(palabraBinario, 2);
 			sbMensaje.append((char)palabraDecimal);
 		}
 		System.out.println(sbMensaje.toString());
-
 	}
 
-	public static void main(String[] args) throws InterruptedException, IOException {
+	public static void main(String[] args) throws Exception {
 
 		short generadora[][] = {
 				{ 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -142,7 +142,7 @@ public class Principal {
 		Matriz mGeneradora = new Matriz(generadora);
 
 
-		Hamming.codificar(getTextoBinario("castellanoPrueba.txt"), mGeneradora);
+		//Hamming.codificar(getTextoBinario("castellanoPrueba.txt"), mGeneradora);
 		Hamming.decodificar(ficheroToMatriz("codificado.txt"), mParidad);
             
 	}

@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 class Hamming {
 
 	static void codificar (StringBuilder [] texto, Matriz mGeneradora) {
@@ -13,7 +15,7 @@ class Hamming {
 	}
 
 
-	static void decodificar(Matriz palabras, Matriz mParidadTraspuesta) {
+	static void decodificar(Matriz palabras, Matriz mParidadTraspuesta) throws Exception {
 		Matriz mResultadoMultiplicacion = palabras.getMultiplicacion(mParidadTraspuesta);
 		for (int i = 0 ; i < mResultadoMultiplicacion.getX() ; i++) {
 			int posError = comprobarPalabra(mResultadoMultiplicacion.getMatriz()[i]);
@@ -22,12 +24,12 @@ class Hamming {
 				System.err.println("Encontrado un error en la posicion: " + posError);
 			}
 		}
+
 		String [] tDecodificado = quitarParidad(palabras);
 		Principal.imprimirMensaje(tDecodificado);
-
 	}
 
-	static int comprobarPalabra(short[] palabra) {
+	private static int comprobarPalabra(short[] palabra) {
 		int suma = 0;
 		int exponente = palabra.length - 1;
 

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TCProject-Hamming:jar">
+    <output-path>$PROJECT_DIR$/classes/artifacts/TCProject_Hamming_jar</output-path>
+    <root id="archive" name="TeoriaDeCodigos.jar">
+      <element id="module-output" name="TeoriaDeCodigos" />
+    </root>
+  </artifact>
+</component>
