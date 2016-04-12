@@ -1,6 +1,6 @@
-public class Hamming {
+class Hamming {
 
-	public static void codificar (StringBuilder [] texto, Matriz mGeneradora) {
+	static void codificar (StringBuilder [] texto, Matriz mGeneradora) {
 		short [][] textoCodificado = new short [texto.length][mGeneradora.getY()];
 		Matriz mTextoCodificado = new Matriz(textoCodificado);
 
@@ -13,7 +13,7 @@ public class Hamming {
 	}
 
 
-	public static void decodificar(Matriz palabras, Matriz mParidadTraspuesta) {
+	static void decodificar(Matriz palabras, Matriz mParidadTraspuesta) {
 		Matriz mResultadoMultiplicacion = palabras.getMultiplicacion(mParidadTraspuesta);
 		for (int i = 0 ; i < mResultadoMultiplicacion.getX() ; i++) {
 			int posError = comprobarPalabra(mResultadoMultiplicacion.getMatriz()[i]);
@@ -27,7 +27,7 @@ public class Hamming {
 
 	}
 
-	private static int comprobarPalabra(short[] palabra) {
+	static int comprobarPalabra(short[] palabra) {
 		int suma = 0;
 		int exponente = palabra.length - 1;
 
@@ -40,12 +40,12 @@ public class Hamming {
 		return suma;
 	}
 
-	private static void corregirError(int posicion, short[] palabraErronea) {
+	static void corregirError(int posicion, short[] palabraErronea) {
 		palabraErronea[posicion-1] = palabraErronea[posicion-1] == 0 ? (short) 1 : (short) 0;
 	}
 
 
-	private static String[] quitarParidad(Matriz palabras){
+	static String[] quitarParidad(Matriz palabras){
 
 		String[] retorno=new String[palabras.getX()];
 
@@ -61,7 +61,4 @@ public class Hamming {
 		}
 		return retorno;
 	}
-
-
-
 }

@@ -1,11 +1,11 @@
-public class Matriz {
+ class Matriz {
     private short [] []  matriz;
 
-    public Matriz(short[][] matriz){
+    Matriz(short[][] matriz){
         this.matriz = matriz;
     }
 
-    public Matriz(int x, int y) {
+    private Matriz(int x, int y) {
        matriz = new short[x][y];
     }
 
@@ -94,7 +94,7 @@ public class Matriz {
         return suma;
     }
 
-    public void binarizar(){
+    private void binarizar(){
         for(int i = 0; i < this.matriz.length; i++){
             for(int j = 0; j < this.matriz[0].length; j++){
                 this.matriz[i][j] = (
@@ -107,6 +107,4 @@ public class Matriz {
     public short[][] getMatriz(){
         return this.matriz;
     }
-
-
 }
