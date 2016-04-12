@@ -1,5 +1,4 @@
 public class Matriz {
-    /*          X  Y    */
     private short [] []  matriz;
 
     public Matriz(short[][] matriz){
@@ -10,7 +9,7 @@ public class Matriz {
        matriz = new short[x][y];
     }
 
-    public Matriz trasponer() {
+    public Matriz getTraspuesta() {
         Matriz traspuesta = new Matriz(getY(), getX());
 
         for (int i = 0 ; i < this.getX() ; i++){
@@ -55,30 +54,32 @@ public class Matriz {
         return ret;
     }
 
-    public Matriz multiplica(Matriz multiplicar) {
-        if(this.getY() != multiplicar.getX()) {
-            throw new ArithmeticException("No se puede multiplicar una matriz Generadora: " + this.getX() + "x" + this.getY()
-                    + " por otra multiplicar: " + multiplicar.getX() + "x" + multiplicar.getY());
+    public Matriz getMultiplicacion(Matriz mFactor) {
+        if(this.getY() != mFactor.getX()) {
+            throw new ArithmeticException("No se puede multiplicar una matriz de orden : "
+                    + this.getX() + "x" + this.getY()
+                    + " por otro Factor de orden: "
+                    + mFactor.getX() + "x" + mFactor.getY());
         }
 
-        Matriz retorno = new Matriz(
+        Matriz producto = new Matriz(
                 this.getX()
-                , multiplicar.getY()
+                , mFactor.getY()
         );
 
-        multiplicar = multiplicar.trasponer();
+        mFactor = mFactor.getTraspuesta();
 
-        for (int i = 0; i < retorno.getX() ; i++) {
-            for(int j=0 ; j < retorno.getY(); j++){
-                retorno.getMatriz()[i][j] = multiplicarVectores(
+        for (int i = 0; i < producto.getX() ; i++) {
+            for(int j=0 ; j < producto.getY(); j++){
+                producto.getMatriz()[i][j] = multiplicarVectores(
                         this.getMatriz()[i],
-                        multiplicar.getMatriz()[j]
+                        mFactor.getMatriz()[j]
                 );
             }
 
         }
-        retorno.binarize();
-        return retorno;
+        producto.binarizar();
+        return producto;
     }
 
     private short multiplicarVectores(short [] v1, short [] v2){
@@ -93,7 +94,7 @@ public class Matriz {
         return suma;
     }
 
-    public void binarize(){
+    public void binarizar(){
         for(int i = 0; i < this.matriz.length; i++){
             for(int j = 0; j < this.matriz[0].length; j++){
                 this.matriz[i][j] = (
