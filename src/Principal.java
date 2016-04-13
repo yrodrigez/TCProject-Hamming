@@ -1,10 +1,71 @@
-import java.awt.*;
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
 
 
 public class Principal {
+
+	public static void menu(Matriz mGeneradora, Matriz mParidad){
+		int o = 0;
+		System.out.println("Opciones:");
+		System.out.println("0. Salir.");
+		System.out.println("1. Codificar archivo de texto.");
+		System.out.println("2. Decodificar archivo de texto.");
+		System.out.println("¿Qué quieres hacer?: ");
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			o = Integer.parseInt(br.readLine());
+		} catch (Exception e) {
+			System.err.println("Error leyendo la opción...");
+			System.err.println("No es un número");
+			o = 65536;
+		}
+		switch (o){
+			case 1:
+				System.out.print("Introduce la ruta del archivo a cofificar: ");
+				try {
+					BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+					String ruta = (br.readLine());
+					System.out.println("Codificando...");
+					Hamming.codificar(getTextoBinario(ruta), mGeneradora);
+					System.out.println("Codificado. Nombre de archivo \"codificado.txt\"");
+				} catch (Exception e) {
+					System.err.println("Error leyendo archivo a codificar...");
+					System.err.println("No existe el fichero introducido...");
+					if(e.getClass() == NullPointerException.class){
+						break;
+					}
+				}
+
+				break;
+			case 2:
+				System.out.print("Introduce la ruta del archivo a decofificar: ");
+				try {
+					BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+					String ruta = (br.readLine());
+					System.out.println("Decodificando...");
+					Hamming.decodificar(ficheroToMatriz(ruta), mParidad);
+					System.out.println("Decodificado. Nombre de archivo \"decodificado.txt\"");
+				} catch (Exception e) {
+					System.err.println("Error leyendo archivo a codificar...");
+					System.err.println("No existe el fichero introducido");
+					if(e.getClass() == NullPointerException.class){
+						break;
+					}
+				}
+				break;
+			case 0:
+				System.out.println("Programa finalizado...");
+				System.exit(0);
+				break;
+			case 65536:
+				// caso cuando se produce una excepción escribiendo algo que no sea un número.
+				break;
+			default:
+				System.err.println("Opción \""+o+"\" no definida");
+				break;
+		}
+	}
 
 	public static StringBuilder [] getTextoBinario(String path) throws IOException {
 		StringBuilder texto = new StringBuilder();
@@ -141,10 +202,19 @@ public class Principal {
 		Matriz mParidad = new Matriz(paridadTraspuesta);
 		Matriz mGeneradora = new Matriz(generadora);
 
+		System.out.println("*******************************************");
+		System.out.println("**         Codificador - Decodificador   **");
+		System.out.println("**            Hamming Binario            **");
+		System.out.println("*******************************************");
+		System.out.println("*******************************************");
+		System.out.println("**  Autores: José Meilán Maldonado       **");
+		System.out.println("**           Yago Rodríguez Lorenzo      **");
+		System.out.println("*******************************************");
 
-		//Hamming.codificar(getTextoBinario("castellanoPrueba.txt"), mGeneradora);
-		Hamming.decodificar(ficheroToMatriz("codificado.txt"), mParidad);
-            
+		while (true){
+			Principal.menu(mGeneradora, mParidad);
+		}
+
 	}
 
 }
