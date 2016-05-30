@@ -1,1 +1,9 @@
-# Created by .ignore support plugin (hsz.mobi)
+# IDE auto-generated sources
+.idea/
+.classpath
+.project
+*.iml
+.settings
+
+# Binaries
+bin/
